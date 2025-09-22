@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>个人网页 | 专业设计师</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* 基础样式与重置 */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    :root {
+      --primary-color: #2c3e50;
+      --secondary-color: #3498db;
+      --accent-color: #f39c12;
+      --light-color: #ecf0f1;
+      --dark-color: #2c3e50;
+      --text-color: #333;
+      --transition: all 0.3s ease;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      color: var(--text-color);
+      line-height: 1.6;
+      background-color: #f9f9f9;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 30px;
+      background: var(--secondary-color);
+      color: white;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: var(--transition);
+      box-shadow: 0 4px 10px rgba(52, 152, 219, 0.3);
+    }
+
+    .btn:hover {
+      background: #2980b9;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 15px rgba(52, 152, 219, 0.4);
+    }
+
+    .section {
+      padding: 80px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 50px;
+      font-size: 2.5rem;
+      color: var(--primary-color);
+      position: relative;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: var(--accent-color);
+    }
+
+    /* 导航栏 */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      padding: 15px 0;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--primary-color);
+    }
+
+    .logo span {
+      color: var(--secondary-color);
+    }
+
+    .nav-links {
+      display: flex;
+    }
+
+    .nav-links li {
+      margin-left: 30px;
+    }
+
+    .nav-links a {
+      font-weight: 600;
+      transition: var(--transition);
+    }
+
+    .nav-links a:hover {
+      color: var(--secondary-color);
+    }
+
+    .menu-toggle {
+      display: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    /* 英雄区域 */
+    .hero {
+      padding-top: 150px;
+      padding-bottom: 80px;
+      background: linear-gradient(135deg, #2c3e50 0%, #4ca1af 100%);
+      color: white;
+      text-align: center;
+    }
+
+    .hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      margin-bottom: 20px;
+      animation: fadeInDown 1s ease;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+      opacity: 0.9;
+      animation: fadeInUp 1s ease;
+    }
+
+    .hero-img {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      margin: 0 auto 30px;
+      overflow: hidden;
+      border: 5px solid rgba(255, 255, 255, 0.2);
+      animation: scaleIn 1s ease;
+    }
+
+    .hero-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* 关于部分 */
+    .about-content {
+      display: flex;
+      align-items: center;
+      gap: 50px;
+    }
+
+    .about-text {
+      flex: 1;
+    }
+
+    .about-text h3 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: var(--primary-color);
+    }
+
+    .about-image {
+      flex: 1;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .about-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: var(--transition);
+    }
+
+    .about-image:hover img {
+      transform: scale(1.05);
+    }
+
+    /* 技能部分 */
+    .skills {
+      background-color: var(--light-color);
+    }
+
+    .skills-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 30px;
+    }
+
+    .skill-item {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      transition: var(--transition);
+    }
+
+    .skill-item:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .skill-icon {
+      font-size: 3rem;
+      color: var(--secondary-color);
+      margin-bottom: 20px;
+    }
+
+    .skill-item h3 {
+      margin-bottom: 15px;
+      color: var(--primary-color);
+    }
+
+    /* 项目部分 */
+    .projects-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .project-item {
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      transition: var(--transition);
+    }
+
+    .project-item:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .project-image {
+      height: 200px;
+      overflow: hidden;
+    }
+
+    .project-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+
+    .project-item:hover .project-image img {
+      transform: scale(1.1);
+    }
+
+    .project-info {
+      padding: 20px;
+    }
+
+    .project-info h3 {
+      margin-bottom: 10px;
+      color: var(--primary-color);
+    }
+
+    /* 联系部分 */
+    .contact {
+      background-color: var(--light-color);
+    }
+
+    .contact-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 50px;
+    }
+
+    .contact-info h3 {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      color: var(--primary-color);
+    }
+
+    .contact-details {
+      margin-top: 30px;
+    }
+
+    .contact-details p {
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+    }
+
+    .contact-details i {
+      margin-right: 15px;
+      color: var(--secondary-color);
+      font-size: 1.2rem;
+    }
+
+    .social-links {
+      display: flex;
+      margin-top: 20px;
+    }
+
+    .social-links a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--secondary-color);
+      color: white;
+      margin-right: 15px;
+      transition: var(--transition);
+    }
+
+    .social-links a:hover {
+      background: var(--primary-color);
+      transform: translateY(-5px);
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 15px;
+      margin-bottom: 20px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+    .contact-form textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+
+    /* 页脚 */
+    footer {
+      background: var(--dark-color);
+      color: white;
+      text-align: center;
+      padding: 30px 0;
+    }
+
+    .footer-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .footer-logo {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .footer-links {
+      display: flex;
+      margin-bottom: 20px;
+    }
+
+    .footer-links a {
+      margin: 0 15px;
+      transition: var(--transition);
+    }
+
+    .footer-links a:hover {
+      color: var(--accent-color);
+    }
+
+    .copyright {
+      margin-top: 20px;
+      opacity: 0.8;
+    }
+
+    /* 动画 */
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes scaleIn {
+      from {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    /* 响应式设计 */
+    @media (max-width: 992px) {
+      .about-content {
+        flex-direction: column;
+      }
+
+      .hero h1 {
+        font-size: 2.8rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+      }
+
+      .nav-links {
+        position: fixed;
+        top: 70px;
+        left: -100%;
+        width: 100%;
+        height: calc(100vh - 70px);
+        background: white;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transition: var(--transition);
+      }
+
+      .nav-links.active {
+        left: 0;
+      }
+
+      .nav-links li {
+        margin: 15px 0;
+      }
+
+      .hero h1 {
+        font-size: 2.3rem;
+      }
+
+      .section-title {
+        font-size: 2rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      .btn {
+        padding: 10px 25px;
+      }
+
+      .section {
+        padding: 60px 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 导航栏 -->
+  <header>
+    <div class="container navbar">
+      <a href="#" class="logo">JunXi<span>Su</span></a>
+      <div class="menu-toggle">
+        <i class="fas fa-bars"></i>
+      </div>
+      <ul class="nav-links">
+        <li><a href="#home">首页</a></li>
+        <li><a href="#about">关于</a></li>
+        <li><a href="#skills">技能</a></li>
+        <li><a href="#projects">项目</a></li>
+        <li><a href="#contact">联系</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- 英雄区域 -->
+  <section class="hero" id="home">
+    <div class="container hero-content">
+      <div class="hero-img">
+        <img src="ziyuan/IMG_3973.jpg" alt="个人照片">
+      </div>
+      <h1>苏峻熙</h1>
+      <p>优秀学生代表 & 欠债开发工程师</p>
+      <a href="#contact" class="btn">联系我</a>
+    </div>
+  </section>
+
+  <!-- 关于部分 -->
+  <section class="section" id="about">
+    <div class="container">
+      <h2 class="section-title">关于我</h2>
+      <div class="about-content">
+        <div class="about-text">
+          <h3>传播爱意！分享资源！</h3>
+          <p>
+            嗨！我是苏峻熙，虽然还在读高中，但我对数学的热爱已经“满级”啦！从初二开始，我就给自己定了一个小目标：把课本上抽象的概念变成“秒懂”的思维导图和动画。到现在，我已经整理了厚厚三本“数学可视化笔记”，还帮全班同学做了“概率陷阱清单”，让大家月考平均分提了
+            11 分！
+            <br>
+          <p>
+            我特别相信“以理解为中心”的学习法。每次学新章节，我都会先采访身边同学：“你觉得哪里最反人类？”再把大家的痛点拆成生活化的比喻——比如把导数想成“过山车坡度”，把复数想成“旋转+缩放”的变形金刚。只要比喻一出，再难的题也能“一眼get”。
+            <br>
+          <p>
+            接下来一年，我想挑战把“立体几何”做成 VR 小游戏，让下一届的学弟学妹戴上眼镜就能“走进”三棱锥。如果你也想让数学变得像打游戏一样爽，欢迎来找我，咱们一起用键盘和想象力，把数学世界“点亮”！</p>
+          <a href="#contact" class="btn" style="margin-top: 20px;">了解更多</a>
+        </div>
+        <div class="about-text">
+          <h3>就读学校</h3>
+          <p>我目前就读于广东省汕尾市华南师大附中汕尾学校，一所历史悠久、注重全面发展的学校。</p>
+          <div class="about-image">
+            <img src="ziyuan/d4168aa3-ca89-3655-a593-e342175516ba.png" alt="就读学校">
+          </div>
+        </div>
+      </div>
+  </section>
+
+  <!-- 技能部分 -->
+  <section class="section skills" id="skills">
+    <div class="container">
+      <h2 class="section-title">我的技能</h2>
+      <div class="skills-container">
+        <div class="skill-item">
+          <div class="skill-icon">
+            <i class="fas fa-pencil-ruler"></i>
+          </div>
+          <h3>数学问题</h3>
+          <p>用户研究、线框图、原型设计、交互设计、视觉设计</p>
+        </div>
+        <div class="skill-item">
+          <div class="skill-icon">
+            <i class="fas fa-code"></i>
+          </div>
+          <h3>前端开发</h3>
+          <p>HTML5, CSS3, JavaScript, React, Vue, 响应式设计</p>
+        </div>
+        <div class="skill-item">
+          <div class="skill-icon">
+            <i class="fas fa-server"></i>
+          </div>
+          <h3>英语问题</h3>
+          <p>通过了国家级初中英语考试。</p>
+        </div>
+        <div class="skill-item">
+          <div class="skill-icon">
+            <i class="fas fa-mobile-alt"></i>
+          </div>
+          <h3>全面发展</h3>
+          <p>掌握多种实践能力</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 项目部分 -->
+  <section class="section" id="projects">
+    <div class="container">
+      <h2 class="section-title">精选项目</h2>
+      <div class="projects-container">
+        <div class="project-item">
+          <div class="project-image">
+            <img src="#" alt="项目1">
+          </div>
+          <div class="project-info">
+            <h3>暂无</h3>
+            <p>未知</p>
+          </div>
+        </div>
+        <div class="project-item">
+          <div class="project-image">
+            <img src="#" alt="项目2">
+          </div>
+          <div class="project-info">
+            <h3>暂无</h3>
+            <p>未知</p>
+          </div>
+        </div>
+        <div class="project-item">
+          <div class="project-image">
+            <img src="#" alt="项目3">
+          </div>
+          <div class="project-info">
+            <h3>暂无</h3>
+            <p>未知</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 联系部分 -->
+  <section class="section contact" id="contact">
+    <div class="container">
+      <h2 class="section-title">联系我</h2>
+      <div class="contact-container">
+        <div class="contact-info">
+          <h3>让我们开始对话</h3>
+          <p>如果您有项目想法或合作机会，请随时与我联系。我期待与您讨论如何将您的想法变为现实。</p>
+          <div class="contact-details">
+            <p><i class="fas fa-envelope"></i> corn0928@qq.com</p>
+            <p><i class="fas fa-phone"></i> +86 177 2858 0313</p>
+            <p><i class="fas fa-map-marker-alt"></i> 广东省汕尾市</p>
+          </div>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#"><i class="fab fa-github"></i></a>
+            <a href="#"><i class="fab fa-dribbble"></i></a>
+          </div>
+        </div>
+        <div class="contact-form">
+          <form>
+            <input type="text" placeholder="您的姓名" required>
+            <input type="email" placeholder="您的邮箱" required>
+            <input type="text" placeholder="主题" required>
+            <textarea placeholder="您的消息" required></textarea>
+            <button type="submit" class="btn">发送消息</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 页脚 -->
+  <footer>
+    <div class="container footer-content">
+      <div class="footer-logo">JunXi<span>Su</span></div>
+      <div class="footer-links">
+        <a href="#home">首页</a>
+        <a href="#about">关于</a>
+        <a href="#skills">技能</a>
+        <a href="#projects">项目</a>
+        <a href="#contact">联系</a>
+      </div>
+      <p class="copyright">&copy; 2025 苏峻熙. 保留所有权利。</p>
+    </div>
+  </footer>
+
+  <script>
+    // 简单的菜单切换功能
+    document.querySelector('.menu-toggle').addEventListener('click', function () {
+      document.querySelector('.nav-links').classList.toggle('active');
+    });
+
+    // 点击导航链接后关闭移动菜单
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.querySelector('.nav-links').classList.remove('active');
+      });
+    });
+  </script>
+</body>
+
+</html>
